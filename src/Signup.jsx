@@ -1,8 +1,9 @@
 import AuthLayout from "./AuthLayout";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useUser } from "./contexts/UserContext";
 
 export default function Signup() {
+  const { handleSignup } = useUser();
   const {
     register,
     handleSubmit,
@@ -11,17 +12,6 @@ export default function Signup() {
     mode: "onChange",
   });
 
-  function handleSignup(data) {
-    // https://dummyjson.com/users/add
-    console.log(data, "---");
-    axios.post('https://dummyjson.com/users/add', data)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
 
   return (
     <AuthLayout>

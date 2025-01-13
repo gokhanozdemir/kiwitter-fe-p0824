@@ -2,12 +2,14 @@ import queryString from "query-string";
 import AuthLayout from "./AuthLayout";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useUser } from "./contexts/UserContext";
 
 export default function Login() {
   const { search } = useLocation();
   const values = queryString.parse(search);
   console.log(values.expiresIn, "***");
+
+  const { handleLogin: handleLoginAPI } = useUser();
 
   const {
     register,
@@ -32,13 +34,7 @@ export default function Login() {
       expiresInMins: 30
     }
 
-    axios.post('https://dummyjson.com/auth/login', loginData)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    handleLoginAPI(loginData);
   }
 
   return (
