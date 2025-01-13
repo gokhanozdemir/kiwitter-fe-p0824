@@ -7,9 +7,22 @@ const UserContext = createContext();
 
 // create a provider component
 export default function UserProvider({ children }) {
-
-
 	const [userInfo, setUserInfo] = useState({});
+	/* // Sample Login Response 
+	{
+		"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3MzY3OTAxMDksImV4cCI6MTczNjc5MDI4OX0.eD8C-iYj4qpoEgMD1DXukyX1GNi7WNOqDZLQOss_oyM",
+		"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3MzY3OTAxMDksImV4cCI6MTczOTM4MjEwOX0.u7X9m0dqhj3bXnSFbaWHKe90AgV-nhras6PdydTb1xg",
+		"id": 1,
+		"username": "emilys",
+		"email": "emily.johnson@x.dummyjson.com",
+		"firstName": "Emily",
+		"lastName": "Johnson",
+		"gender": "female",
+		"image": "https://dummyjson.com/icon/emilys/128"
+	}
+	
+	*/
+	const isLoggedIn = Boolean(userInfo.accessToken);
 
 	const history = useHistory();
 	function handleLogin(data) {
@@ -42,7 +55,7 @@ export default function UserProvider({ children }) {
 	}
 
 	return (
-		<UserContext.Provider value={{ userInfo, handleLogin, handleLogout, handleSignup }}>
+		<UserContext.Provider value={{ userInfo, isLoggedIn, handleLogin, handleLogout, handleSignup }}>
 			{children}
 		</UserContext.Provider>
 	);

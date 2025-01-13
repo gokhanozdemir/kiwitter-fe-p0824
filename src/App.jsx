@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import Login from "./Login";
 import Signup from "./Signup";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -19,9 +20,9 @@ function App() {
           {/* /?variant=most_liked */}
           <PageLayout>Home</PageLayout>
         </Route>
-        <Route path="/profile/:nick">
+        <PrivateRoute path="/profile/:nick">
           <PageLayout>Profile page</PageLayout>
-        </Route>
+        </PrivateRoute>
         <Route path="/detail/:twitId">
           <PageLayout>Twit detail</PageLayout>
         </Route>

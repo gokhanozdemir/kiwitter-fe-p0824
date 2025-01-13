@@ -24,7 +24,6 @@ export default function Login() {
     /* {
     "username": "emilys",
     "password": "emilyspass",
-    
   } */
 
     console.log(data, "---");
