@@ -14,17 +14,23 @@
 - **twit silme:** kullanıcılar sadece kendi twitilerini silebilmeli, admin her twiti silebilmeli.
 
 ## endpointler
- 
-| İşlem | Method | Endpoint |
-| ------ | ------ | ------ |
-| createUser | POST | `/users` |
-| login | POST | `/login` |
-| createTwit | POST | `/twits` |
-| replyToTwit | POST | `/twits/:twitId/replies` |
-| likeTwit | POST | `/twits/:twitId/likes` |
-| getTwits | GET | `/twits` |
-| getTopTwits | GET | `/twits/popular` |
-| getTwitDetails | GET | `/twits/:twitId` |
-| getUserTwits | GET | `/users/:userId/twits` |
-| getUserLikes | GET | `/users/:userId/likes` |
 
+### API DOCS Details
+
+https://kiwitter-node-77f5acb427c1.herokuapp.com/api-docs/#/
+baseURL: https://kiwitter-node-77f5acb427c1.herokuapp.com
+
+### Summary
+
+| İşlem          | Method | Endpoint                  |
+| -------------- | ------ | ------------------------- |
+| createUser     | POST   | `/users`                  |
+| login          | POST   | `/login`                  |
+| createTwit     | POST   |  `/twits`                 |
+| replyToTwit    | POST   |  `/twits/:twitId/replies` |
+| likeTwit       | POST   |  `/twits/:twitId/likes`   |
+| getTwits       | GET    |  `/twits`                 |
+| getTopTwits    | GET    |  `/twits/popular`         |
+| getTwitDetails | GET    |  `/twits/:twitId`         |
+| getUserTwits   | GET    | `/users/:userId/twits`    |
+| getUserLikes   | GET    | `/users/:userId/likes`    |
