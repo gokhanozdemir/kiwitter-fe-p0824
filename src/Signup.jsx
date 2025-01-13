@@ -1,5 +1,6 @@
 import AuthLayout from "./AuthLayout";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 export default function Signup() {
   const {
@@ -11,7 +12,15 @@ export default function Signup() {
   });
 
   function handleSignup(data) {
+    // https://dummyjson.com/users/add
     console.log(data, "---");
+    axios.post('https://dummyjson.com/users/add', data)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
