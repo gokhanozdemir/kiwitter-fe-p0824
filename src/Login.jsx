@@ -2,6 +2,7 @@ import queryString from "query-string";
 import AuthLayout from "./AuthLayout";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 export default function Login() {
   const { search } = useLocation();
@@ -17,7 +18,27 @@ export default function Login() {
   });
 
   function handleLogin(data) {
+    // https://dummyjson.com/auth/login
+    /* {
+    "username": "emilys",
+    "password": "emilyspass",
+    
+  } */
+
     console.log(data, "---");
+    const loginData = {
+      username: data.nickname,
+      password: data.password,
+      expiresInMins: 30
+    }
+
+    axios.post('https://dummyjson.com/auth/login', loginData)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
