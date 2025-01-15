@@ -13,7 +13,7 @@ export default function PageLayout({ children }) {
           </h1>
 
           {isLoggedIn ? (
-            <button onClick={handleLogout} className="h-12 text-center block w-full rounded-lg bg-primary text-white font-bold flex flex-nowrap justify-center items-center gap-2">Çıkış yap {/* <LogOut />  */}{userInfo.firstName}</button>
+            <button onClick={handleLogout} className="h-12 text-center block w-full rounded-lg bg-primary text-white font-bold flex flex-nowrap justify-center items-center gap-2">Çıkış yap {/* <LogOut />  */}{userInfo.name}</button>
           ) : (
             <div className="flex gap-4 items-center">
               <Link to="/login">
