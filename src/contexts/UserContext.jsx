@@ -8,10 +8,10 @@ import { jwtDecode } from "jwt-decode";
 const UserContext = createContext();
 
 // https://kiwitter-node-77f5acb427c1.herokuapp.com/api-docs/#/Auth/post_users_signup
-const instance = axios.create({
+export const instance = axios.create({
 	baseURL: 'https://kiwitter-node-77f5acb427c1.herokuapp.com',
 	timeout: 5000,
-	headers: { 'costum': 'data' }
+	//headers: { 'costum': 'data' }
 });
 // https://kiwitter-node-77f5acb427c1.herokuapp.com/
 
