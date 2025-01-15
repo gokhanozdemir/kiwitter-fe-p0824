@@ -26,7 +26,7 @@ export default function Login() {
     const loginData = {
       nickname: data.nickname,
       password: data.password,
-      expiresIn: 21600000
+      expiresIn: 1 * 60 * 6 // in seconds
     }
 
     /* 
