@@ -11,7 +11,7 @@ const UserContext = createContext();
 export const instance = axios.create({
 	baseURL: 'https://kiwitter-node-77f5acb427c1.herokuapp.com',
 	timeout: 5000,
-	// headers: { 'costum': 'data' }
+	//headers: { 'costum': 'data' }
 });
 // https://kiwitter-node-77f5acb427c1.herokuapp.com/
 
