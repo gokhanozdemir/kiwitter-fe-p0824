@@ -20,18 +20,19 @@ export default function Login() {
   });
 
   function handleLogin(data) {
-    // https://dummyjson.com/auth/login
-    /* {
-    "username": "emilys",
-    "password": "emilyspass",
-  } */
+
 
     console.log(data, "---");
     const loginData = {
-      username: data.nickname,
+      nickname: data.nickname,
       password: data.password,
-      expiresInMins: 30
+      expiresIn: 21600000
     }
+
+    /* 
+    sample user
+    p0824d2t1
+    1234 */
 
     handleLoginAPI(loginData);
   }

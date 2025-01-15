@@ -21,7 +21,7 @@ export default function Signup() {
       <form onSubmit={handleSubmit(handleSignup)}>
         <div className="pt-4">
           <div className="flex justify-between gap-2 items-baseline pb-1">
-            <label htmlFor="nickname ">İsim Soyisim</label>
+            <label htmlFor="name ">İsim Soyisim</label>
             <span className="text-sm font-medium text-red-600">
               {errors.name && errors.name.message.toString()}
             </span>

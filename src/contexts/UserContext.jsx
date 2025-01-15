@@ -4,32 +4,27 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 const UserContext = createContext();
 
+// https://kiwitter-node-77f5acb427c1.herokuapp.com/api-docs/#/Auth/post_users_signup
+const instance = axios.create({
+	baseURL: 'https://kiwitter-node-77f5acb427c1.herokuapp.com',
+	timeout: 5000,
+	headers: { 'costum': 'data' }
+});
+// https://kiwitter-node-77f5acb427c1.herokuapp.com/
 
+// 6hours 
+const millisecondsInSixHours = 6 * 60 * 60 * 1000;
 
 // create a provider component
 export default function UserProvider({ children }) {
 	const [userInfo, setUserInfo] = useLocalStorage("user", {});
-	/* // Sample Login Response 
-	{
-		"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3MzY3OTAxMDksImV4cCI6MTczNjc5MDI4OX0.eD8C-iYj4qpoEgMD1DXukyX1GNi7WNOqDZLQOss_oyM",
-		"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3MzY3OTAxMDksImV4cCI6MTczOTM4MjEwOX0.u7X9m0dqhj3bXnSFbaWHKe90AgV-nhras6PdydTb1xg",
-		"id": 1,
-		"username": "emilys",
-		"email": "emily.johnson@x.dummyjson.com",
-		"firstName": "Emily",
-		"lastName": "Johnson",
-		"gender": "female",
-		"image": "https://dummyjson.com/icon/emilys/128"
-	}
-	
-	*/
 	const isLoggedIn = Boolean(userInfo.accessToken);
 
 	const history = useHistory();
 	function handleLogin(data) {
 		console.log(data, "---");
 
-		axios.post('https://dummyjson.com/auth/login', data)
+		instance.post('/login', data)
 			.then(function (response) {
 				console.log(response);
 				setUserInfo(response.data);
@@ -41,7 +36,7 @@ export default function UserProvider({ children }) {
 	}
 
 	function handleSignup(data) {
-		axios.post('https://dummyjson.com/users/add', data)
+		instance.post('/users/signup', data)
 			.then(function (response) {
 				console.log(response);
 				history.push('/login');
