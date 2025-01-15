@@ -1,7 +1,10 @@
 import axios from "axios";
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { isPast } from "date-fns";
+
+import { jwtDecode } from "jwt-decode";
 const UserContext = createContext();
 
 // https://kiwitter-node-77f5acb427c1.herokuapp.com/api-docs/#/Auth/post_users_signup
@@ -17,8 +20,20 @@ const millisecondsInSixHours = 6 * 60 * 60 * 1000;
 
 // create a provider component
 export default function UserProvider({ children }) {
-	const [userInfo, setUserInfo] = useLocalStorage("user", {});
-	const isLoggedIn = Boolean(userInfo.accessToken);
+	const [userToken, setUserToken] = useLocalStorage("user", {});
+	const [userInfo, setUserInfo] = useState({})
+	const isLoggedIn = Boolean(userToken.token);
+
+	useEffect(() => {
+		if (userToken.token) {
+			const decoded = jwtDecode(userToken?.token);
+			if (isPast(decoded.exp * 1000)) {
+				handleLogout()
+			} else {
+				setUserInfo(decoded)
+			}
+		}
+	}, [userToken])
 
 	const history = useHistory();
 	function handleLogin(data) {
@@ -27,7 +42,7 @@ export default function UserProvider({ children }) {
 		instance.post('/login', data)
 			.then(function (response) {
 				console.log(response);
-				setUserInfo(response.data);
+				setUserToken(response.data);
 				history.push('/');
 			})
 			.catch(function (error) {
@@ -47,11 +62,11 @@ export default function UserProvider({ children }) {
 	}
 
 	function handleLogout() {
-		setUserInfo({});
+		setUserToken({});
 	}
 
 	return (
-		<UserContext.Provider value={{ userInfo, isLoggedIn, handleLogin, handleLogout, handleSignup }}>
+		<UserContext.Provider value={{ userToken, userInfo, isLoggedIn, handleLogin, handleLogout, handleSignup }}>
 			{children}
 		</UserContext.Provider>
 	);
